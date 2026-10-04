@@ -1,0 +1,20 @@
+{
+  "customer": {
+    "plan": "プレミアム会員（月額）",
+    "orders": [
+      {
+        "id": "A-1001",
+        "item": "ワイヤレスイヤホン",
+        "status": "配達済み",
+        "days_since_delivery": 6
+      },
+      {
+        "id": "A-1002",
+        "item": "モバイルバッテリー",
+        "status": "発送済み（まだ届いていない）",
+        "days_since_delivery": null
+      }
+    ]
+  },
+  "refund_policy": "到着後14日以内なら返品・返金できます"
+}

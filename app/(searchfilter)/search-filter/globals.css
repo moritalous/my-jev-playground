@@ -1,0 +1,240 @@
+:root {
+  --bg: #f6f5f2;
+  --panel: #ffffff;
+  --ink: #1d1d1b;
+  --muted: #6b6a66;
+  --line: #e4e2dc;
+  --exact: #1f8a4c;
+  --exact-bg: #e6f4ec;
+  --sub: #b86e00;
+  --sub-bg: #fdf1dc;
+  --comp: #3a64c8;
+  --comp-bg: #e8eefb;
+  --irr: #8a8a86;
+  --irr-bg: #efefec;
+  --no: #c23b2e;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    14px / 1.5 -apple-system,
+    BlinkMacSystemFont,
+    "Hiragino Sans",
+    "Noto Sans JP",
+    sans-serif;
+}
+header.top {
+  padding: 20px 24px 8px;
+}
+h1 {
+  font-size: 18px;
+  margin: 0 0 4px;
+}
+header.top p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 2;
+  border-bottom: 1px solid var(--line);
+}
+select,
+button {
+  font: inherit;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+}
+select {
+  min-width: 300px;
+  max-width: 100%;
+}
+button.primary {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+  cursor: pointer;
+  font-weight: 600;
+}
+button.primary:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+label.toggle {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--muted);
+  cursor: pointer;
+}
+.stats {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.warn {
+  margin: 12px 24px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--sub-bg);
+  color: var(--sub);
+}
+.query {
+  padding: 16px 24px 4px;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.query .q {
+  font-size: 20px;
+  font-weight: 700;
+}
+.query .chip {
+  font-size: 12px;
+}
+main.grid {
+  padding: 8px 24px 40px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.card {
+  position: relative;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 170px;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+.card.hidden {
+  display: none;
+}
+.warn[hidden] {
+  display: none;
+}
+.title {
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.meta {
+  color: var(--muted);
+  font-size: 12px;
+}
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 12px;
+}
+.chip.yes {
+  color: var(--exact);
+  border-color: var(--exact);
+}
+.chip.no {
+  color: var(--no);
+  border-color: var(--no);
+  text-decoration: line-through;
+}
+.chip.unknown {
+  color: var(--muted);
+  border-style: dashed;
+}
+.card.go {
+  border-color: var(--exact);
+  animation: glow 1.6s ease-in-out infinite;
+}
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 transparent,
+      0 0 10px 1px color-mix(in srgb, var(--exact) 45%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--exact) 35%, transparent),
+      0 0 24px 6px color-mix(in srgb, var(--exact) 55%, transparent);
+  }
+}
+.card .ban {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 110px;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(1.8);
+}
+.card.stop > :not(.ban) {
+  opacity: 0.35;
+}
+.card.stop .ban {
+  animation: stamp 0.28s cubic-bezier(0.2, 1.4, 0.5, 1) forwards;
+}
+@keyframes stamp {
+  to {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+@media (max-width: 640px) {
+  header.top,
+  .bar,
+  .query,
+  main.grid {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  main.grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .card .ban {
+    font-size: 80px;
+  }
+  select {
+    min-width: 0;
+    width: 100%;
+  }
+  .stats {
+    margin-left: 0;
+  }
+}
